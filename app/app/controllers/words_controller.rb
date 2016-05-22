@@ -4,18 +4,11 @@ class WordsController < ApplicationController
 	end
 	def new
 		  @word = Word.new
-		  @word.meanings.build #不要遗漏
-
-
+		  @word.meanings.build
 		  puts @word
-
 	end
 	def create
-
-		#render plain: params[:word].inspect
-
-		# @word = Word.new(word_params)
-		@word = Word.create(person_params)
+		@word = Word.create(word_params)
 
 		if @word.save
 			redirect_to @word
@@ -44,12 +37,8 @@ class WordsController < ApplicationController
 		 
 		redirect_to words_path
 	end
-	private
-		def word_params
-	    	params.require(:word).permit(:word)
-    	end
     private
-    	def person_params
+    	def word_params
 		   	params.require(:word).permit(:word, meanings_attributes: [ :id, :cn])
 		end
 
