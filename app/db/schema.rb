@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522084806) do
+ActiveRecord::Schema.define(version: 20160522092157) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20160522084806) do
 
   add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
 
+  create_table "meanings", force: :cascade do |t|
+    t.string   "cn",         limit: 255
+    t.integer  "word_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "meanings", ["word_id"], name: "index_meanings_on_word_id", using: :btree
+
   create_table "words", force: :cascade do |t|
     t.string   "word",          limit: 255
     t.integer  "access_count",  limit: 4
@@ -40,4 +49,5 @@ ActiveRecord::Schema.define(version: 20160522084806) do
   end
 
   add_foreign_key "comments", "articles"
+  add_foreign_key "meanings", "words"
 end

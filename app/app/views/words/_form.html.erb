@@ -15,9 +15,17 @@
     <%= f.text_field :word %>
   </p>
  
+  <h2>Meanings</h2>
   
+    <%= f.fields_for :meanings do |addresses_form| %>
+        <%= addresses_form.label :cn %>
+        <%= addresses_form.text_field :cn %>
+  
+  
+<% end %> 
  
-  <p>
+ <p>
     <%= f.submit %>
   </p>
+
 <% end %>
